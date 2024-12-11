@@ -7,6 +7,27 @@
     "text": "Code\nlibrary(tidyverse)\nlibrary(Polychrome)\nlibrary(withr)\nlibrary(fs)\nlibrary(compositions)\n\n\nplot_nuc_survival &lt;- function(df, ylim, ybreaks, ncol){\n  ggplot(df, aes(x=m, y=value, color=name, linetype = name)) + \n    geom_step(direction = \"mid\") +\n    scale_x_continuous(limits = c(0.5, 3.5), \n                       breaks = c(1, 2, 3), \n                       minor_breaks = NULL) +\n    scale_y_log10(breaks = {{ ybreaks }},\n                  labels = scales::trans_format(\"log10\", scales::math_format(10^.x))) + \n    labs(x=(\"Nucleotide multiplicitiy, m\"), \n         y=(\"Total mutations ≥ m\"),\n         color = NULL) +\n    scale_color_manual(values = c(\"blue\", \"red\")) +\n    scale_linetype(guide = 'none') +\n    facet_wrap(~label, ncol = {{ ncol }}) +\n    annotation_logticks(sides = \"l\", color = \"grey40\") +\n    coord_cartesian(ylim = c(1, {{ ylim }})) +\n    theme_bw() +\n    theme(\n      strip.placement = 'outside',\n      strip.background = element_blank(),\n      panel.grid = element_blank(),\n      legend.position = \"bottom\"\n    )\n}"
   },
   {
+    "objectID": "Analysis.html#cap-plot-for-the-whole-data",
+    "href": "Analysis.html#cap-plot-for-the-whole-data",
+    "title": "Metagenome Analysis",
+    "section": "CAP plot for the whole data",
+    "text": "CAP plot for the whole data\nFirst split by History, second one split by Experiment\n\n\nCode\nggplot() +\n  geom_point(data=sites_all, aes(x=CAP1, y=CAP2, color=Experiment), alpha = 1.5, size = 4) +\n  labs(x = paste0(\"CAP1 (\", round(summary(vegan::eigenvals(cap_results_all))[2,1] *100, 2)\n, \"%)\"),\n       y = paste0(\"CAP2 (\", round(summary(vegan::eigenvals(cap_results_all))[2,2] *100, 2)\n, \"%)\")) +\n  facet_wrap(History ~ .)\n\n\n\n\n\nCode\nggplot() +\n  geom_point(data=sites_all, aes(x=CAP1, y=CAP2, color=History), alpha = 1.5, size = 4) +\n  labs(x = paste0(\"CAP1 (\", round(summary(vegan::eigenvals(cap_results_all))[2,1] *100, 2)\n, \"%)\"),\n       y = paste0(\"CAP2 (\", round(summary(vegan::eigenvals(cap_results_all))[2,2] *100, 2)\n, \"%)\")) +\n  facet_wrap(Experiment ~ .)"
+  },
+  {
+    "objectID": "Analysis.html#cap-plots-for-the-no-tetrahymena-data",
+    "href": "Analysis.html#cap-plots-for-the-no-tetrahymena-data",
+    "title": "Metagenome Analysis",
+    "section": "CAP plots for the no-tetrahymena data",
+    "text": "CAP plots for the no-tetrahymena data\nFirst plot split by History, second one split by Experiment. Experiment t0 refers to the timepoint 0 (start of the experiment).\n\n\nCode\nggplot() +\n  geom_point(data=sites, aes(x=CAP1, y=CAP2, color=Experiment), alpha = 1.5, size = 4) +\n  labs(x = paste0(\"CAP1 (\", round(summary(vegan::eigenvals(cap_results))[2,1] *100, 2)\n, \"%)\"),\n       y = paste0(\"CAP2 (\", round(summary(vegan::eigenvals(cap_results))[2,2] *100, 2)\n, \"%)\")) +\n  facet_wrap(History ~ .)\n\n\n\n\n\nCode\nggplot() +\n  geom_point(data=sites, aes(x=CAP1, y=CAP2, color=History), alpha = 1.5, size = 4) +\n  labs(x = paste0(\"CAP1 (\", round(summary(vegan::eigenvals(cap_results))[2,1] *100, 2)\n, \"%)\"),\n       y = paste0(\"CAP2 (\", round(summary(vegan::eigenvals(cap_results))[2,2] *100, 2)\n, \"%)\")) +\n  facet_wrap(Experiment ~ .)"
+  },
+  {
+    "objectID": "Analysis.html#distances-between-the-timepoints-t3-and-t0-for-each-replicate",
+    "href": "Analysis.html#distances-between-the-timepoints-t3-and-t0-for-each-replicate",
+    "title": "Metagenome Analysis",
+    "section": "Distances between the timepoints t3 and t0 for each replicate",
+    "text": "Distances between the timepoints t3 and t0 for each replicate\n\n\nCode\ntest_t0 &lt;- sites %&gt;% select(-Sample) %&gt;%\n  filter(Timepoint == \"t0\")\n\ntest_t3 &lt;- sites %&gt;% select(-Sample) %&gt;%\n  filter(Timepoint == \"t3\" & History != \"Ancestor\")\n\ntest &lt;- right_join(test_t0, test_t3,\n          by = join_by(History, Replicate),\n          suffix = c(\"_t0\", \"_t3\")) %&gt;%\n  select(-c(\"Experiment_t0\", \"Timepoint_t0\", \"Timepoint_t3\")) %&gt;%\n  rename(\"Experiment\" = \"Experiment_t3\") %&gt;%\n  mutate(CAP1_dist = (CAP1_t0 - CAP1_t3)^2,\n         CAP2_dist = (CAP2_t0 - CAP2_t3)^2) %&gt;%\n  mutate(dist = sqrt(CAP1_dist + CAP2_dist)) %&gt;%\n  mutate(History_Experiment = paste(History, Experiment, sep = \"_\"))\n\ntest %&gt;%\n  ggplot(aes(x = History_Experiment, y = dist)) +\n  geom_boxplot() +\n  labs(y = \"Distance between t3 and t0\")"
+  },
+  {
     "objectID": "Analysis.html#no-vaf-filter",
     "href": "Analysis.html#no-vaf-filter",
     "title": "Metagenome Analysis",
@@ -26,5 +47,12 @@
     "title": "Metagenome Analysis",
     "section": "Plot",
     "text": "Plot\nDistribution of nucleotide multiplicity (the number of replicates with with the same genomic mutation) for HAMBI x history x treatment combinations. The observed data in blue, the null expectation in red.\n\n\nCode\nnuc_survival &lt;- variants_filt %&gt;%\n  filter(VAF &gt; 0.05) %&gt;%\n  dplyr::select(HAMBI, History, Experiment, POS, REF, ALT, Replicate) %&gt;% \n  # multiplicity = number of replicate populations each unique mutation is\n  # observed in\n  summarize(m = n_distinct(Replicate), .by = c(HAMBI, History, Experiment, POS, REF, ALT)) %&gt;%\n  # now calculate the total number of mutations across all replicates so we need\n  # to ungroup by mutation position/alt allele but because we still want to\n  # determine this value by treatment category we keep the treatment category\n  # grouping. However, this should be changed if you want to for example average\n  # over all the treatment conditions on a species basis\n  group_by(HAMBI, History, Experiment) %&gt;%\n  count(m, name = \"m_count\") %&gt;%\n  mutate(n = m * m_count,\n         Ntot = sum(n),\n         perc = n / Ntot * 100) %&gt;%\n  left_join(chrom_lengths, by = join_by(HAMBI)) %&gt;%\n  arrange(cur_group_id(), desc(m)) %&gt;%\n  #  dpois() tells the probability mass at a given number of counts. Here we\n  #  want to get the probability of observing n mutations with multiplicity\n  #  = mi (i.e. the counts of mi in the observed data). We assume that\n  #  mutations independently occur on the genome of size Ltot at a rate of\n  #  lambda = Ntot/Ltot and that generally the events are rare. Thus this\n  #  situation can be modeled by the Poisson distribution. We can get the\n  #  binned number of mutations per level of multiplicity m by multiplying\n  #  the probability by the length of the genome and the binned mutations\n  #  divided by the total number of mutations.\n  mutate(m_count_expected = cumsum((m_count / Ntot) *\n                                     sum_bases *\n                                     dpois(m, lambda = Ntot / sum_bases))) %&gt;%\n  #dplyr::select(-num_contigs) %&gt;%\n  relocate(m, n, Ntot, perc, m_count, m_count_expected) %&gt;%\n  ungroup()\n\n# setup for plotting\nnuc_survival_plot &lt;- nuc_survival %&gt;% \n  group_by(HAMBI, History, Experiment) %&gt;% \n  # when there is only one multiplicity observed for a mutation filter such\n  # that the multiplicty of that mutation must be greater than one.\n  # Otherwise include all remaining mutations (m &gt; 0)\n  filter(case_when(n() == 1 ~ m &gt; 1,\n                   TRUE ~ m &gt; 0)) %&gt;% \n  pivot_longer(cols = c(\"m_count\", \"m_count_expected\")) %&gt;% \n  mutate(label = paste(HAMBI, \"History:\", History, \"\\nExperiment:\", Experiment)) %&gt;% \n  # and make final plot\n  plot_nuc_survival(., 5000, c(1, 10, 100, 1000, 10000), 4)\n\nnuc_survival_plot"
+  },
+  {
+    "objectID": "Analysis.html#table",
+    "href": "Analysis.html#table",
+    "title": "Metagenome Analysis",
+    "section": "Table",
+    "text": "Table\n\n\nCode\nnuc_survival_table &lt;- nuc_survival %&gt;% \n  mutate(Ntot_f = sum(n)) %&gt;%\n  reframe(perc = sum(n)/Ntot_f*100, .by = \"m\") %&gt;% \n  distinct() %&gt;% \n  mutate(cum_perc = cumsum(perc))\n\nknitr::kable(nuc_survival_table)\n\n\n\n\n\nm\nperc\ncum_perc\n\n\n\n\n3\n19.33472\n19.33472\n\n\n2\n17.46362\n36.79834\n\n\n1\n63.20166\n100.00000"
   }
 ]
