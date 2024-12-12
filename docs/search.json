@@ -11,7 +11,7 @@
     "href": "Analysis.html#cap-plot-for-the-whole-data",
     "title": "Metagenome Analysis",
     "section": "CAP plot for the whole data",
-    "text": "CAP plot for the whole data\nFirst split by History, second one split by Experiment\n\n\nCode\nggplot() +\n  geom_point(data=sites_all, aes(x=CAP1, y=CAP2, color=Experiment), alpha = 1.5, size = 4) +\n  labs(x = paste0(\"CAP1 (\", round(summary(vegan::eigenvals(cap_results_all))[2,1] *100, 2)\n, \"%)\"),\n       y = paste0(\"CAP2 (\", round(summary(vegan::eigenvals(cap_results_all))[2,2] *100, 2)\n, \"%)\")) +\n  facet_wrap(History ~ .)\n\n\n\n\n\nCode\nggplot() +\n  geom_point(data=sites_all, aes(x=CAP1, y=CAP2, color=History), alpha = 1.5, size = 4) +\n  labs(x = paste0(\"CAP1 (\", round(summary(vegan::eigenvals(cap_results_all))[2,1] *100, 2)\n, \"%)\"),\n       y = paste0(\"CAP2 (\", round(summary(vegan::eigenvals(cap_results_all))[2,2] *100, 2)\n, \"%)\")) +\n  facet_wrap(Experiment ~ .)"
+    "text": "CAP plot for the whole data\nFirst split by History, second one split by Experiment. Experiment t0 refers to the timepoint 0 (start of the experiment).\n\n\nCode\nggplot() +\n  geom_point(data=sites_all, aes(x=CAP1, y=CAP2, color=Experiment), alpha = 1.5, size = 4) +\n  labs(x = paste0(\"CAP1 (\", round(summary(vegan::eigenvals(cap_results_all))[2,1] *100, 2)\n, \"%)\"),\n       y = paste0(\"CAP2 (\", round(summary(vegan::eigenvals(cap_results_all))[2,2] *100, 2)\n, \"%)\")) +\n  facet_wrap(History ~ .)\n\n\n\n\n\nCode\nggplot() +\n  geom_point(data=sites_all, aes(x=CAP1, y=CAP2, color=History), alpha = 1.5, size = 4) +\n  labs(x = paste0(\"CAP1 (\", round(summary(vegan::eigenvals(cap_results_all))[2,1] *100, 2)\n, \"%)\"),\n       y = paste0(\"CAP2 (\", round(summary(vegan::eigenvals(cap_results_all))[2,2] *100, 2)\n, \"%)\")) +\n  facet_wrap(Experiment ~ .)"
   },
   {
     "objectID": "Analysis.html#cap-plots-for-the-no-tetrahymena-data",
@@ -25,7 +25,7 @@
     "href": "Analysis.html#distances-between-the-timepoints-t3-and-t0",
     "title": "Metagenome Analysis",
     "section": "Distances between the timepoints t3 and t0",
-    "text": "Distances between the timepoints t3 and t0\n\n\nCode\ntest_t0 &lt;- sites %&gt;% select(-Sample) %&gt;%\n  filter(Timepoint == \"t0\")\n\ntest_t3 &lt;- sites %&gt;% select(-Sample) %&gt;%\n  filter(Timepoint == \"t3\" & History != \"Ancestor\")\n\ntest &lt;- right_join(test_t0, test_t3,\n          by = join_by(History, Replicate),\n          suffix = c(\"_t0\", \"_t3\")) %&gt;%\n  select(-c(\"Experiment_t0\", \"Timepoint_t0\", \"Timepoint_t3\")) %&gt;%\n  rename(\"Experiment\" = \"Experiment_t3\") %&gt;%\n  mutate(CAP1_dist = (CAP1_t0 - CAP1_t3)^2,\n         CAP2_dist = (CAP2_t0 - CAP2_t3)^2) %&gt;%\n  mutate(dist = sqrt(CAP1_dist + CAP2_dist)) %&gt;%\n  mutate(History_Experiment = paste(History, Experiment, sep = \"_\"))\n\ntest %&gt;%\n  ggplot(aes(x = History_Experiment, y = dist)) +\n  geom_boxplot() +\n  labs(y = \"Distance between t3 and t0\")"
+    "text": "Distances between the timepoints t3 and t0\nDistance between the t3 and t0 points in the CAP plot for each History-Experiment combination where two timepoints existed.\n\n\nCode\ntest_t0 &lt;- sites %&gt;% select(-Sample) %&gt;%\n  filter(Timepoint == \"t0\")\n\ntest_t3 &lt;- sites %&gt;% select(-Sample) %&gt;%\n  filter(Timepoint == \"t3\" & History != \"Ancestor\")\n\ntest &lt;- right_join(test_t0, test_t3,\n          by = join_by(History, Replicate),\n          suffix = c(\"_t0\", \"_t3\")) %&gt;%\n  select(-c(\"Experiment_t0\", \"Timepoint_t0\", \"Timepoint_t3\")) %&gt;%\n  rename(\"Experiment\" = \"Experiment_t3\") %&gt;%\n  mutate(CAP1_dist = (CAP1_t0 - CAP1_t3)^2,\n         CAP2_dist = (CAP2_t0 - CAP2_t3)^2) %&gt;%\n  mutate(dist = sqrt(CAP1_dist + CAP2_dist)) %&gt;%\n  mutate(History_Experiment = paste(History, Experiment, sep = \"_\"))\n\ntest %&gt;%\n  ggplot(aes(x = History_Experiment, y = dist)) +\n  geom_boxplot() +\n  labs(y = \"Distance between t3 and t0\")"
   },
   {
     "objectID": "Analysis.html#table",
@@ -46,6 +46,6 @@
     "href": "Analysis.html#table-1",
     "title": "Metagenome Analysis",
     "section": "Table",
-    "text": "Table\n\n\nCode\nnuc_survival_table &lt;- nuc_survival %&gt;% \n  mutate(Ntot_f = sum(n)) %&gt;%\n  reframe(perc = sum(n)/Ntot_f*100, .by = \"m\") %&gt;% \n  distinct() %&gt;% \n  mutate(cum_perc = cumsum(perc))\n\nknitr::kable(nuc_survival_table)\n\n\n\n\n\nm\nperc\ncum_perc\n\n\n\n\n3\n19.25466\n19.25466\n\n\n2\n17.80538\n37.06004\n\n\n1\n62.93996\n100.00000"
+    "text": "Table\nDistributions summarised.\n\n\nCode\nnuc_survival_table &lt;- nuc_survival %&gt;% \n  mutate(Ntot_f = sum(n)) %&gt;%\n  reframe(perc = sum(n)/Ntot_f*100, .by = \"m\") %&gt;% \n  distinct() %&gt;% \n  mutate(cum_perc = cumsum(perc))\n\nknitr::kable(nuc_survival_table)\n\n\n\n\n\nm\nperc\ncum_perc\n\n\n\n\n3\n19.25466\n19.25466\n\n\n2\n17.80538\n37.06004\n\n\n1\n62.93996\n100.00000"
   }
 ]
