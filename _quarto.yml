@@ -1,3 +1,18 @@
 project:
   type: website
   output-dir: docs
+website:
+  title: "Metagenome Analysis"
+  sidebar:
+    style: "docked"
+    background: light
+    contents:
+      - section: "Variant distance analysis"
+        contents:
+          - text: "CAP plots"
+            file: Analysis.qmd
+      
+      - section: "Parallelism and variants"
+        contents:
+          - text: "All analysis"
+            file: Analysis2.qmd
