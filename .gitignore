@@ -1,4 +1,6 @@
-*
-!docs
 
-/.quarto/
+.quarto
+*.qmd
+Analysis_050225.txt
+data
+.Rproj.user
