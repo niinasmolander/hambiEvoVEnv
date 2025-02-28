@@ -12,6 +12,8 @@ website:
             file: Analysis1.qmd
           - text: "Parallelism"
             file: Analysis2.qmd
+          - text: "Variant trajectories"
+            file: Analysis4.qmd
           - text: "Old and de novo variants"
             file: Analysis3.qmd
 
