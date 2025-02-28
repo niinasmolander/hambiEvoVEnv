@@ -1,3 +1,22 @@
 project:
   type: website
   output-dir: docs
+
+website:
+  sidebar:
+    style: "docked"
+    contents:
+      - section: "Metagenome analysis"
+        contents:
+          - text: "Variant counts, CAP and tSNE"
+            file: Analysis1.qmd
+          - text: "Parallelism"
+            file: Analysis2.qmd
+          - text: "Old and de novo variants"
+            file: Analysis3.qmd
+
+format:
+  html:
+    # when printing dataframes use rmarkdown::paged_table())
+    df-print: paged
+    
