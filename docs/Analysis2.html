@@ -6497,15 +6497,15 @@ window.onload = function() {
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>high_density_genes <span class="ot">&lt;-</span> mgvars_filt_mb_ns <span class="sc">%&gt;%</span> </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(HAMBI, GENE, replicate, Home, Measure) <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>high_density_genes <span class="ot">&lt;-</span> mgvars_filt_mb_ns <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(HAMBI, GENE, replicate, Home, Measure) <span class="sc">%&gt;%</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mutwindox =</span> POS <span class="sc">-</span> <span class="fu">lag</span>(POS),</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">mut_num =</span> <span class="fu">n</span>(),</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">mut_dens =</span> <span class="fu">n</span>()<span class="sc">/</span>(<span class="fu">max</span>(POS) <span class="sc">-</span>  <span class="fu">min</span>(POS))) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mut_dens <span class="sc">!=</span> <span class="cn">Inf</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mut_dens <span class="sc">&gt;</span> <span class="fl">0.15</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(GENE) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">mut_dens =</span> <span class="fu">n</span>()<span class="sc">/</span>(<span class="fu">max</span>(POS) <span class="sc">-</span>  <span class="fu">min</span>(POS))) <span class="sc">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mut_dens <span class="sc">!=</span> <span class="cn">Inf</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mut_dens <span class="sc">&gt;</span> <span class="fl">0.15</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(GENE) <span class="sc">%&gt;%</span></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>()</span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>output_gene_table_filt <span class="ot">&lt;-</span> result_sp_treat<span class="sc">$</span>output_gene_table <span class="sc">%&gt;%</span> </span>
@@ -6514,8 +6514,8 @@ window.onload = function() {
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># only include genes with at least 3 hits in the same gene or found in more than one replicate.</span></span>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(observed_hits_n_i <span class="sc">&gt;=</span> <span class="dv">3</span> <span class="sc">|</span> n_replicate <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filters out the problematic genes above unless the number of replicates detected is 2 or more</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">case_when</span>(n_replicate <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">~</span> <span class="sc">!</span>(locus_tag <span class="sc">%in%</span> high_density_genes), </span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>                   <span class="cn">TRUE</span> <span class="sc">~</span> n_replicate <span class="sc">&gt;</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">case_when</span>(n_replicate <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">~</span> <span class="sc">!</span>(locus_tag <span class="sc">%in%</span> high_density_genes),</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>                   <span class="cn">TRUE</span> <span class="sc">~</span> n_replicate <span class="sc">&gt;</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(degentab, <span class="at">by =</span> <span class="fu">join_by</span>(locus_tag, strainID)) <span class="sc">%&gt;%</span></span>
 <span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(locus_tag)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -6862,7 +6862,7 @@ window.onload = function() {
 <span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">prokka_annotation =</span> product) <span class="sc">%&gt;%</span> </span>
 <span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(strainID, Home, Measure, COG_category_long, Preferred_name, Description, prokka_annotation)</span>
 <span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="co">#write_tsv(output_gene_table_filt_cog, &quot;data/results/enriched_parallel_genes.tsv&quot;)</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="fu">write_tsv</span>(output_gene_table_filt_cog, <span class="st">&quot;data/results/enriched_parallel_genes.tsv&quot;</span>)</span>
 <span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>eggnog_nslen <span class="ot">&lt;-</span> <span class="fu">left_join</span>(eggnog, degentab,</span>
 <span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>                          <span class="at">by =</span> <span class="fu">join_by</span>(strainID, locus_tag)) <span class="sc">%&gt;%</span> </span>

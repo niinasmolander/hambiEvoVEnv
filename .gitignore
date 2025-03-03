@@ -6,3 +6,5 @@ data
 .Rproj.user
 
 /.quarto/
+Rplot.pdf
+test_script.R
