@@ -6548,9 +6548,9 @@ window.onload = function() {
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cvdv &lt;- list()</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># for(HAMBI in unique(output_gene_table_filt$strainID)){</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   cat(paste(&quot;\n&quot;, HAMBI, &quot; &quot;))</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   </span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   cvdv[[HAMBI]] &lt;- try(resample_jaccard(100000, prep4jaccard_resample(output_gene_table_filt, degentab, HAMBI, Home, Measure)))</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   </span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># write_rds(cvdv, &quot;data/results/jaccard_cvdv_all.rds&quot;)</span></span>
@@ -6627,7 +6627,7 @@ window.onload = function() {
 <tr class="even">
 <td style="text-align: left;">HAMBI_1842</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.00087</td>
+<td style="text-align: right;">0.00096</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: left;">Home: Ancestor, Measure: Control</td>
@@ -6636,7 +6636,7 @@ window.onload = function() {
 <tr class="odd">
 <td style="text-align: left;">HAMBI_1842</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">0.00029</td>
+<td style="text-align: right;">0.00034</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: left;">Home: Ancestor, Measure: Control</td>
@@ -6645,7 +6645,7 @@ window.onload = function() {
 <tr class="even">
 <td style="text-align: left;">HAMBI_1842</td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">0.00032</td>
+<td style="text-align: right;">0.00035</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: left;">Home: Ancestor, Measure: Control</td>
@@ -6654,7 +6654,7 @@ window.onload = function() {
 <tr class="odd">
 <td style="text-align: left;">HAMBI_1842</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">0.00032</td>
+<td style="text-align: right;">0.00019</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: left;">Home: Ancestor, Measure: Streptomycin</td>
@@ -6663,7 +6663,7 @@ window.onload = function() {
 <tr class="even">
 <td style="text-align: left;">HAMBI_1842</td>
 <td style="text-align: right;">6</td>
-<td style="text-align: right;">0.00106</td>
+<td style="text-align: right;">0.00090</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: left;">Home: Ancestor, Measure: Streptomycin</td>
@@ -6681,7 +6681,7 @@ window.onload = function() {
 <tr class="even">
 <td style="text-align: left;">HAMBI_1972</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.00000</td>
+<td style="text-align: right;">0.00001</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: left;">Home: Ancestor, Measure: Control</td>
@@ -6708,7 +6708,7 @@ window.onload = function() {
 <tr class="odd">
 <td style="text-align: left;">HAMBI_1977</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.00054</td>
+<td style="text-align: right;">0.00059</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: left;">Home: Ancestor, Measure: Streptomycin</td>
@@ -6717,7 +6717,7 @@ window.onload = function() {
 <tr class="even">
 <td style="text-align: left;">HAMBI_1977</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">0.00028</td>
+<td style="text-align: right;">0.00025</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: left;">Home: Ancestor, Measure: Streptomycin</td>
@@ -6726,7 +6726,7 @@ window.onload = function() {
 <tr class="odd">
 <td style="text-align: left;">HAMBI_1977</td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">0.00058</td>
+<td style="text-align: right;">0.00066</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: left;">Home: Ancestor, Measure: Streptomycin</td>
@@ -6735,7 +6735,7 @@ window.onload = function() {
 <tr class="even">
 <td style="text-align: left;">HAMBI_1977</td>
 <td style="text-align: right;">4</td>
-<td style="text-align: right;">0.00041</td>
+<td style="text-align: right;">0.00074</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: left;">Home: Control, Measure: Streptomycin</td>
@@ -6753,7 +6753,7 @@ window.onload = function() {
 <tr class="even">
 <td style="text-align: left;">HAMBI_1977</td>
 <td style="text-align: right;">6</td>
-<td style="text-align: right;">0.00054</td>
+<td style="text-align: right;">0.00052</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: left;">Home: Streptomycin, Measure: Control</td>
