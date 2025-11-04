@@ -242,7 +242,7 @@
     "href": "Analysis4.html#upset-plot",
     "title": "Metagenome Analysis",
     "section": "2.2) UpSet plot",
-    "text": "2.2) UpSet plot\nInstead of a Venn diagram, using UpSet plot to visualise how many parallel genes were in different home+measurement conditions. (Pretty good explanation on how these plots work can be found at https://upset.app/). The shared parallel genes are listed in the table below and should be in the same order as the bars / intersections.\n\n\nCode\np\n\n\n\n\n\n\n\nCode\nrmarkdown::paged_table(venn_table)"
+    "text": "2.2) UpSet plot\nInstead of a Venn diagram, using an UpSet plot to visualise how many parallel genes were in different home+measurement conditions. The shared parallel genes are listed in the table below and should be in the same order as the bars / intersections.\n\n\nCode\np\n\n\n\n\n\n\n\nCode\nrmarkdown::paged_table(venn_table)"
   },
   {
     "objectID": "Analysis3.html#rpsl-gene-vaf-table",
