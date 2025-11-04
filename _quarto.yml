@@ -14,7 +14,7 @@ website:
             file: Analysis2.qmd
           - text: "Parallel gene plots"
             file: Analysis4.qmd
-          - text: "Old and de novo variants"
+          - text: "Streptomycin resistance related genes"
             file: Analysis3.qmd
 
 format:
