@@ -12,10 +12,14 @@ website:
             file: Analysis1.qmd
           - text: "Parallelism"
             file: Analysis2.qmd
-          - text: "Parallel gene plots"
+          - text: "Parallel gene plots (all groups)"
             file: Analysis4.qmd
+          - text: "Parallel gene plots (meas_env and strep)"
+            file: Analysis5.qmd
           - text: "Streptomycin resistance related genes"
             file: Analysis3.qmd
+          - text: "Redundancy analysis (RDA)"
+            file: Analysis7.qmd
 
 format:
   html:
