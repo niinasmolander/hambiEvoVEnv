@@ -1,0 +1,28 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  sidebar:
+    style: "docked"
+    contents:
+      - section: "Metagenome analysis"
+        contents:
+          - text: "Variant counts (per Mb), pi, CAP and tSNE"
+            file: Analysis1.qmd
+          - text: "Parallelism"
+            file: Analysis2.qmd
+          - text: "Parallel gene plots (all groups)"
+            file: Analysis4.qmd
+          - text: "Streptomycin resistance related genes"
+            file: Analysis3.qmd
+          - text: "Redundancy analysis (RDA)"
+            file: Analysis7.qmd
+          - text: "Variants per Mb and strain abundance"
+            file: Analysis8.qmd
+
+format:
+  html:
+    # when printing dataframes use rmarkdown::paged_table())
+    df-print: paged
+    
