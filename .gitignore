@@ -62,3 +62,9 @@ out/
 .yarn/install-state.gz
 .pnp.*
 docs/data
+.quarto
+data
+old_scripts
+plots
+*.R
+*.qmd
