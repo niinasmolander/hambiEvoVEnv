@@ -6,7 +6,7 @@
 ._*
 
 # Custom folder icons
-Icon
+Icon
 
 # Volume root files
 .DocumentRevisions-V100
@@ -68,3 +68,5 @@ old_scripts
 plots
 *.R
 *.qmd
+
+/.quarto/

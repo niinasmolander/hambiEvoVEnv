@@ -354,14 +354,14 @@
     "href": "Analysis1.html#barplot",
     "title": "Metagenome Analysis",
     "section": "1.1) barplot",
-    "text": "1.1) barplot\nTracking all mutations in a) Home:B; b) Home:BS; c) Home:Anc\n\n\nCode\np1"
+    "text": "1.1) barplot\nTracking all mutations in a) Home:B; b) Home:BS; c) Home:Anc. Shaded region represents de novo mutations.\n\n\nCode\np1"
   },
   {
     "objectID": "Analysis1.html#filtered-barplot",
     "href": "Analysis1.html#filtered-barplot",
     "title": "Metagenome Analysis",
     "section": "1.2) filtered barplot",
-    "text": "1.2) filtered barplot\nNo intergenic, intragenic, synonymous, fusion or modifier mutations in a) Home:B; b) Home:BS; c) Home:Anc\n\n\nCode\np2"
+    "text": "1.2) filtered barplot\nNo intergenic, intragenic, synonymous, fusion or modifier mutations in a) Home:B; b) Home:BS; c) Home:Anc. Shaded region represents de novo mutations.\n\n\nCode\np2"
   },
   {
     "objectID": "Analysis1.html#swarm-plot",
